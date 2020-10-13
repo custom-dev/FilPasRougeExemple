@@ -83,7 +83,9 @@ namespace FilPasRougeExemple.Actions
 			// On utilise un peu de linq, avec le chaînage des méthodes.
 			Type[] types = AppDomain.CurrentDomain.GetAssemblies()
 				.SelectMany(s => s.GetTypes())
-				.Where(p => wantedInterface.IsAssignableFrom(p) && p.IsClass)
+				.Where(p => wantedInterface.IsAssignableFrom(p) && 
+							p.IsClass &&
+							!p.IsAbstract)
 				.ToArray();
 
 			return types;

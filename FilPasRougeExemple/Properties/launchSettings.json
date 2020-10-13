@@ -2,7 +2,7 @@
   "profiles": {
     "FilPasRougeExemple": {
       "commandName": "Project",
-      "commandLineArgs": "Hello"
+      "commandLineArgs": "ShowVDM"
     }
   }
 }

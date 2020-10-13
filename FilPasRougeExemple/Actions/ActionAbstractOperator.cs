@@ -5,13 +5,10 @@ using System.Text;
 
 namespace FilPasRougeExemple.Actions
 {
-	public abstract class ActionAbstractOperator : IAction
+	public abstract class ActionAbstractOperator : ActionAbstract
 	{
-		private readonly TextWriter _writer;
-
-		public ActionAbstractOperator(TextWriter writer)
+		public ActionAbstractOperator(TextWriter writer): base(writer)
 		{
-			_writer = writer;
 		}
 
 		/// <summary>
@@ -24,11 +21,7 @@ namespace FilPasRougeExemple.Actions
 		/// <returns>Résultat de l'opération</returns>
 		protected abstract float Compute(float f1, float f2);
 
-		public abstract string Name { get; }
-
-		public abstract string Description { get; }
-
-		public void Action(string[] parameters)
+		public override void Action(string[] parameters)
 		{
 			string n1 = parameters[1];
 			string n2 = parameters[2];
@@ -37,7 +30,7 @@ namespace FilPasRougeExemple.Actions
 			float f2 = float.Parse(n2);
 
 			float result = this.Compute(f1, f2);
-			_writer.WriteLine(result);
+			this.Writer.WriteLine(result);
 		}
 	}
 }
