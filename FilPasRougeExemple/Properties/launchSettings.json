@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "FilPasRougeExemple": {
+      "commandName": "Project",
+      "commandLineArgs": "Hello"
+    }
+  }
+}
