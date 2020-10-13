@@ -5,29 +5,20 @@ using System.Text;
 
 namespace FilPasRougeExemple.Actions
 {
-	public class ActionAdd : IAction
+	public class ActionAdd : ActionAbstractOperator
 	{
-		private readonly TextWriter _writer;
-
-		public ActionAdd(TextWriter writer)
+		public ActionAdd(TextWriter writer) : base (writer)
 		{
-			_writer = writer;
+
 		}
 
+		public override string Name => "Add";
 
-		public string Name => "Add";
+		public override string Description => "Calcule la somme des deux nombres passés en paramètre";
 
-		public string Description => "Calcule la somme des deux nombres passés en paramètre";
-
-		public void Action(string[] parameters)
+		protected override float Compute(float f1, float f2)
 		{
-			string n1 = parameters[1];
-			string n2 = parameters[2];
-
-			float f1 = float.Parse(n1);
-			float f2 = float.Parse(n2);
-
-			_writer.WriteLine(f1 + f2);
+			return f1 + f2;
 		}
 	}
 }

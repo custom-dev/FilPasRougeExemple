@@ -5,29 +5,20 @@ using System.Text;
 
 namespace FilPasRougeExemple.Actions
 {
-	public class ActionSub : IAction
+	public class ActionSub : ActionAbstractOperator
 	{
-		private readonly TextWriter _writer;
-
-		public ActionSub(TextWriter writer)
+		public ActionSub(TextWriter writer) : base(writer)
 		{
-			_writer = writer;
 		}
 
 
-		public string Name => "Sub";
+		public override string Name => "Sub";
 
-		public string Description => "Calcule la différence des deux nombres passés en paramètre";
+		public override string Description => "Calcule la différence des deux nombres passés en paramètre";
 
-		public void Action(string[] parameters)
+		protected override float Compute(float f1, float f2)
 		{
-			string n1 = parameters[1];
-			string n2 = parameters[2];
-
-			float f1 = float.Parse(n1);
-			float f2 = float.Parse(n2);
-
-			_writer.WriteLine(f1 - f2);
+			return f1 - f2;
 		}
 	}
 }
