@@ -45,8 +45,9 @@ namespace FilPasRougeExemple.BusinessLayer.VDM
 			_downloaderFactory = downloaderFactory;
 		}
 
-		public IReadOnlyList<VieDeMerde> GetLastVieDeMerdes()
+		public VieDeMerdeCollection GetLastVieDeMerdes()
 		{
+			VieDeMerdeCollection vdms = new VieDeMerdeCollection();
 			List<VieDeMerde> list = new List<VieDeMerde>();
 
 			using (IDownloader downloader = _downloaderFactory.Create())
@@ -67,7 +68,8 @@ namespace FilPasRougeExemple.BusinessLayer.VDM
 				}
 			}
 
-			return list;
+			vdms.VieDemerde = list.ToArray();
+			return vdms;
 		}
 		
 		private static string ExtractTitre(HtmlNode article)

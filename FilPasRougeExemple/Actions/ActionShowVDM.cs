@@ -20,15 +20,9 @@ namespace FilPasRougeExemple.Actions
 		public override void Action(string[] parameters)
 		{
 			VieDeMerdeQuery query = new VieDeMerdeQuery();
-			IReadOnlyCollection<VieDeMerde> vdms = query.GetLastVieDeMerdes();
+			VieDeMerdeCollection vdms = query.GetLastVieDeMerdes();
 
-			foreach (VieDeMerde vdm in vdms)
-			{
-				this.Writer.WriteLine($"Titre: {vdm.Titre}");
-				this.Writer.WriteLine($"Auteur: {vdm.Auteur}");
-				this.Writer.WriteLine(vdm.Contenu);
-				this.Writer.WriteLine();
-			}
+			vdms.Display(this.Writer);			
 		}
 	}
 }
