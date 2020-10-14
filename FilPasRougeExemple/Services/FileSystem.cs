@@ -26,5 +26,15 @@ namespace FilPasRougeExemple.Services
 		{
 			Directory.CreateDirectory(path);
 		}
+
+		public byte[] ReadAllBytes(string filename)
+		{
+			return File.ReadAllBytes(filename);
+		}
+
+		public void WriteAllBytes(string filename, byte[] data)
+		{
+			File.WriteAllBytes(filename, data);
+		}
 	}
 }

@@ -6,22 +6,19 @@ using System.Text;
 
 namespace FilPasRougeExemple.Actions
 {
-	public class ActionHello : IAction
+	public class ActionHello : ActionAbstract
 	{
-		private readonly TextWriter _writer;
-
-		public ActionHello(TextWriter writer)
+		public ActionHello(TextWriter writer): base(writer)
 		{
-			_writer = writer;
 		}
 
-		public string Name => "Hello";
+		public override string Name => "Hello";
 
-		public string Description => "Affiche 'Hello World'";
+		public override string Description => "Affiche 'Hello World'";
 
-		public void Action(string[] parameters)
+		public override void Action(string[] parameters)
 		{
-			_writer.WriteLine("Hello World");
+			this.Writer.WriteLine("Hello World");
 		}
 	}
 }

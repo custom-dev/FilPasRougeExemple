@@ -17,12 +17,21 @@ namespace FilPasRougeExempleTests.Actions
 		{
 			_fileSystem = Mock.Of<IFileSystem>();
 			Mock.Get(_fileSystem)
-				.Setup(x => x.ReadAllText(It.Is<string>(s => s.EndsWith("viedemerde.json"))))
-				.Returns<string>(x => File.ReadAllText("viedemerde.json"));
+				.Setup(x => x.ReadAllText(It.IsAny<string>()))
+				.Returns<string>(x => File.ReadAllText(Path.GetFileName(x)));
 
 			Mock.Get(_fileSystem)
-				.Setup(x => x.Exists(It.Is<string>(s => s.EndsWith("viedemerde.json"))))
-				.Returns<string>(x => File.Exists("viedemerde.json"));
+				.Setup(x => x.Exists(It.IsAny<string>()))
+				.Returns<string>(x => File.Exists(Path.GetFileName(x)));
+
+			Mock.Get(_fileSystem)
+				.Setup(x => x.WriteAllBytes(It.IsAny<string>(), It.IsAny<byte[]>()))
+				.Callback<string, byte[]>((filename, data) => File.WriteAllBytes(filename, data));
+
+			Mock.Get(_fileSystem)
+				.Setup(x => x.ReadAllBytes(It.IsAny<string>()))
+				.Returns<string>(x => File.ReadAllBytes(Path.GetFileName(x)));
+
 			base.Init();
 		}
 
