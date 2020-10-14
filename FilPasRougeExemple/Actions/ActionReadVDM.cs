@@ -1,4 +1,5 @@
 ﻿using FilPasRougeExemple.BusinessLayer.VDM;
+using FilPasRougeExemple.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,9 +9,9 @@ using System.Text;
 
 namespace FilPasRougeExemple.Actions
 {
-	public class ActionReadVDM : ActionAbstract
-	{
-		public ActionReadVDM(TextWriter writer) : base(writer)
+	public class ActionReadVDM : ActionAbstractFileSystem
+	{		
+		public ActionReadVDM(TextWriter writer, IFileSystem fileSystem) : base(writer, fileSystem)
 		{
 		}
 
@@ -24,9 +25,9 @@ namespace FilPasRougeExemple.Actions
 			string path = Path.Combine(applicationData, "FilPasRouge");
 			string filename = Path.Combine(path, "viedemerde.json");
 
-			if (File.Exists(filename))
+			if (this.FileSystem.Exists(filename))
 			{
-				string json = File.ReadAllText(filename);
+				string json = this.FileSystem.ReadAllText(filename);
 				VieDeMerdeCollection collection = Newtonsoft.Json.JsonConvert.DeserializeObject<VieDeMerdeCollection>(json);
 
 				collection.Display(this.Writer);

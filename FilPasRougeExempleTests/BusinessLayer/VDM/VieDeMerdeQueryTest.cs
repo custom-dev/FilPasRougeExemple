@@ -30,18 +30,18 @@ namespace FilPasRougeExempleTests.Services
 
 			// Act
 			VieDeMerdeQuery query = new VieDeMerdeQuery(downloaderFactory);
-			IReadOnlyList<VieDeMerde> vdms = query.GetLastVieDeMerdes();
+			VieDeMerdeCollection vdms = query.GetLastVieDeMerdes();
 
 			// Assert
-			Assert.AreEqual(30, vdms.Count);
-			Assert.AreEqual("Le trottoir c'est pas pour les chiens", vdms[0].Titre);
-			Assert.AreEqual("lau", vdms[0].Auteur);
+			Assert.AreEqual(30, vdms.VieDemerde.Length);
+			Assert.AreEqual("Le trottoir c'est pas pour les chiens", vdms.VieDemerde[0].Titre);
+			Assert.AreEqual("lau", vdms.VieDemerde[0].Auteur);
 
-			Assert.AreEqual("Dernier recours", vdms[1].Titre);
-			Assert.AreEqual("Anonyme", vdms[1].Auteur);
+			Assert.AreEqual("Dernier recours", vdms.VieDemerde[1].Titre);
+			Assert.AreEqual("Anonyme", vdms.VieDemerde[1].Auteur);
 			
-			Assert.AreEqual("Dictature", vdms[2].Titre);
-			Assert.AreEqual("Plante verte", vdms[2].Auteur);
+			Assert.AreEqual("Dictature", vdms.VieDemerde[2].Titre);
+			Assert.AreEqual("Plante verte", vdms.VieDemerde[2].Auteur);
 		}
 	}
 }

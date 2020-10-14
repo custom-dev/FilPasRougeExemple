@@ -13,7 +13,7 @@ namespace FilPasRougeExempleTests.Actions
 		private List<string> _output;
 
 		[TestInitialize]
-		public void Init()
+		public virtual void Init()
 		{
 			_writer = Mock.Of<TextWriter>();
 			_output = new List<string>();

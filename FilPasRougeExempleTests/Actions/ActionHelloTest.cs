@@ -22,7 +22,7 @@ namespace FilPasRougeExempleTests.Actions
 			action.Action(this.GetParameters("Hello"));
 
 			// assert
-			Assert.AreEqual("Hello World !", this.Lines[0]);
+			Assert.AreEqual("Hello World", this.Lines[0]);
 		}		
 	}
 }

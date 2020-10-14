@@ -1,4 +1,5 @@
 ﻿using FilPasRougeExemple.BusinessLayer.VDM;
+using FilPasRougeExemple.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,9 +9,9 @@ using System.Text;
 
 namespace FilPasRougeExemple.Actions
 {
-	public class ActionWriteVDM : ActionAbstract
+	public class ActionWriteVDM : ActionAbstractFileSystem
 	{
-		public ActionWriteVDM(TextWriter writer) : base(writer)
+		public ActionWriteVDM(TextWriter writer, IFileSystem fileSystem) : base(writer, fileSystem)
 		{
 		}
 
@@ -26,9 +27,9 @@ namespace FilPasRougeExemple.Actions
 			string applicationData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 			string path = Path.Combine(applicationData, "FilPasRouge");
 			string filename = Path.Combine(path, "viedemerde.json");
-			Directory.CreateDirectory(path);
+			this.FileSystem.CreateDirectory(path);
 			string json = Newtonsoft.Json.JsonConvert.SerializeObject(collection);
-			File.WriteAllText(filename, json);
+			this.FileSystem.WriteAllText(filename, json);
 		}
 	}
 }
