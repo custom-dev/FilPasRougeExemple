@@ -15,9 +15,9 @@ namespace FilPasRougeExemple.Actions
 
 		}
 
-		public override string Name => "Hello";
+		public override string Name => "GenKey";
 
-		public override string Description => "Affiche 'Hello World'";
+		public override string Description => "Génère une clé avec AES";
 
 		public override void Action(string[] parameters)
 		{

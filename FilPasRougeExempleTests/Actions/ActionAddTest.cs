@@ -12,6 +12,30 @@ namespace FilPasRougeExempleTests.Actions
 	public class ActionAddTest : AbstractActionTest
 	{
 		[TestMethod]
+		public void HasCorrectName()
+		{
+			// arrange			
+			ActionAdd action = new ActionAdd(this.Writer);
+
+			// act
+
+			// assert
+			Assert.AreEqual("Add", action.Name);
+		}
+
+		[TestMethod]
+		public void HasDescription()
+		{
+			// arrange			
+			ActionAdd action = new ActionAdd(this.Writer);
+
+			// act
+
+			// assert
+			Assert.IsFalse(String.IsNullOrEmpty(action.Description));
+		}
+
+		[TestMethod]
 		public void Compute()
 		{
 			// arrange			
