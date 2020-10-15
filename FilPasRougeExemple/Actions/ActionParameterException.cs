@@ -8,9 +8,9 @@ namespace FilPasRougeExemple.Actions
 	{
 		public const string INVALID_PARAMETER_COUNT = "Nombre de paramètres invalides";
 
-		public ActionParameterException() : base() { }
+		public ActionParameterException() : this(ActionParameterException.INVALID_PARAMETER_COUNT) { }
 
-		public ActionParameterException(string message) : base(message) { }
+		public ActionParameterException(string message) : this(message, null) { }
 
 		public ActionParameterException(string message, Exception innerException) : base(message, innerException) { }	
 	}

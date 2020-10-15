@@ -24,5 +24,13 @@ namespace FilPasRougeExempleTests.Actions
 			// assert
 			Assert.AreEqual("Hello World", this.Lines[0]);
 		}		
+
+		[TestMethod]
+		[ExpectedException(typeof(ActionParameterException))]
+		public void MustRaiseException()
+		{
+			IAction action = new ActionHello(this.Writer);
+			action.Action(null);
+		}
 	}
 }

@@ -63,7 +63,7 @@ namespace FilPasRougeExemple.Actions
 		/// <param name="parameters"></param>
 		protected override void Action(string[] parameters)
 		{
-			if (parameters == null || parameters.Length != 3) { throw new ActionParameterException(ActionParameterException.INVALID_PARAMETER_COUNT); }
+			if (parameters == null || parameters.Length != 3) { throw new ActionParameterException(); }
 			string n1 = parameters[1];
 			string n2 = parameters[2];
 

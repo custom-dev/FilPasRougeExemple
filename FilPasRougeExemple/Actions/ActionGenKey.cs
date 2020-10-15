@@ -28,7 +28,7 @@ namespace FilPasRougeExemple.Actions
 
 		protected override void Action(string[] parameters)
 		{
-			if (parameters == null || parameters.Length != 2) { throw new ActionParameterException(ActionParameterException.INVALID_PARAMETER_COUNT); }
+			if (parameters == null || parameters.Length != 2) { throw new ActionParameterException(); }
 
 			string keyFile = parameters[1];
 
