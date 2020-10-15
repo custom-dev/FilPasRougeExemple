@@ -4,19 +4,76 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace FilPasRougeExemple.BusinessLayer
+namespace FilPasRougeExemple.Utils
 {
+    /// <summary>
+    /// Gestion de la cryptographie
+    /// </summary>
+    /// <remarks>
+    /// Le contenu chiffré va contenir plusieurs informations
+    /// <list type="bullet">
+    /// <item>[clair] 1 octet : numéro de version</item>
+    /// <item>[clair] 16 octets : le vecteur d'initialisation</item>
+    /// <item>[chiffré] 32 octets : la signature (un hash du contenu original)</item>
+    /// <item>[chiffré] le reste : le contenu</item>
+    /// </list>
+    /// 
+    /// Le numéro de version sera utilisée en cas d'évolution de l'algorithme. 
+    /// Par exemple, si une faille est découverte, on pourra changer de versio nde donc 
+    /// d'algorithme de chiffrement
+    /// 
+    /// Le vecteur d'initialisation est le "sel" utilisé lors du chiffrement.
+    /// 
+    /// La signature permettra de s'assurer que les données n'ont pas été corrompues.
+    /// 
+    /// Le chiffrement va donc consister à réaliser les étapes suivantes :
+    /// <list type="bullet">
+    /// <item>écrire 1</item>
+    /// <item>écrire les 16 octets du vecteur d'initialisation</item>
+    /// <item>commencer le chiffrement</item>
+    /// <item>écrire les 32 octets du hash</item>
+    /// <item>écrire les octets du contenu à chiffrer</item>
+    /// <item>terminer le chiffrement</item>
+    /// </list>
+    /// 
+    /// Le déchiffrement va suivre les étades presques dans le même ordre :
+    /// <list type="bullet">
+    /// <item>lire le numéro de version. Si c'est à 1, on continue</item>
+    /// <item>lire les 16 octets du numéro de version</item>
+    /// <item>commencer le déchiffrement, en utilisant le vecteur d'initialisation récupéré
+    ///     à l'étape précédente</item>
+    /// <item>lire les 32 octets du hash</item>
+    /// <item>lire le reste du message</item>
+    /// <item>calculer le hash du message lu à l'étape précédente</item>
+    /// <item>vérifier que les hashs correspondent.</item>
+    /// </list>
+    /// 
+    /// La méthode retenue pour le calcul du hash est le SHA256.
+    /// </remarks>
     public class AesCryptography
     {   
+        /// <summary>
+        /// Génère une nouvelle clé de chiffrement pour 
+        /// être utilisée avec l'algorithme Aes.
+        /// </summary>
+        /// <returns>Nouvelle clé de chiffrement</returns>
         public static byte[] GenerateKey()
 		{
             using (Aes aes = Aes.Create())
 			{
-                aes.GenerateIV();
+                aes.GenerateKey();
                 return aes.Key;
 			}
         }
 
+        /// <summary>
+        /// Chiffre un contenu avec la clé passée en paramètre.
+        /// 
+        /// L'algorithme utilisée est AES en mode CBC
+        /// </summary>
+        /// <param name="plainContent">Contenu à chiffrer</param>
+        /// <param name="key">Clé de chiffrement</param>
+        /// <returns>Contenu chiffré</returns>       
         public static byte[] EncryptWithAes(byte[] plainContent, byte[] key)
         {
             if (plainContent == null || plainContent.Length == 0) { throw new ArgumentNullException("plainText"); }
@@ -56,6 +113,14 @@ namespace FilPasRougeExemple.BusinessLayer
             return encrypted;
         }
 
+        /// <summary>
+        /// Déchiffre un contenu avec la clé passée en paramètre.
+        /// 
+        /// L'algorithme utilisée est AES en mode CBC
+        /// </summary>
+        /// <param name="plainContent">Contenu à déchiffrer</param>
+        /// <param name="key">Clé de chiffrement</param>
+        /// <returns>Contenu en clair</returns>
         public static byte[] DecryptWithAes(byte[] cipherText, byte[] key)
         {
             if (cipherText == null || cipherText.Length == 0) { throw new ArgumentNullException("cipherText"); }
@@ -106,6 +171,12 @@ namespace FilPasRougeExemple.BusinessLayer
             return plainContent;
         }
 
+        /// <summary>
+        /// Compare deux tableaux de bytes.
+        /// </summary>
+        /// <param name="array1">Premier tableau</param>
+        /// <param name="array2">Second tableau</param>
+        /// <returns>true si les tableaux contiennent des données identiques, false sinon</returns>
         private static bool CompareByteArray(byte[] array1, byte[] array2)
         {
             if (array1 == array2) { return true; }
