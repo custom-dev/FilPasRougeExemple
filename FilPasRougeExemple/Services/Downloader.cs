@@ -19,7 +19,7 @@ namespace FilPasRougeExemple.Services
 	// ses membres) et hérite de l'interface (donc doit définir ses membres).
 	// La classe DownloaderService répond donc à notre problème ! On a "rajouté"
 	// une interface à notre classe de base.
-	public class DownloaderService : WebClient, IDownloader
+	public class Downloader : WebClient, IDownloader
 	{	
 	
 	}
