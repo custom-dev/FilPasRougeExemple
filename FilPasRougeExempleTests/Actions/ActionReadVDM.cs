@@ -19,7 +19,7 @@ namespace FilPasRougeExempleTests.Actions
 			ActionReadVDM action = new ActionReadVDM(this.Writer, this.FileSystem);
 			
 			// act
-			action.Action(this.GetParameters("ReadVDM"));
+			action.Action();
 
 			// assert
 			Assert.IsTrue(this.Lines[0].StartsWith("Titre: "));
@@ -39,7 +39,7 @@ namespace FilPasRougeExempleTests.Actions
 			}
 
 			// act
-			action.Action(this.GetParameters("ReadVDM"));
+			action.Action();
 
 			// assert
 			Assert.AreEqual("Pas de données.", this.Lines[0]);

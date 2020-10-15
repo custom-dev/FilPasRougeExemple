@@ -18,10 +18,10 @@ namespace FilPasRougeExempleTests.Actions
 			ActionMul action = new ActionMul(this.Writer);
 			
 			// act
-			action.Action(this.GetParameters("Mul", 3, 5));
-			action.Action(this.GetParameters("Mul", 0, 0));
-			action.Action(this.GetParameters("Mul", 1, 5));
-			action.Action(this.GetParameters("Mul", -3, 5));
+			action.Action(3, 5);
+			action.Action(0, 0);
+			action.Action(1, 5);
+			action.Action(-3, 5);
 
 			// assert
 			Assert.AreEqual("15", this.Lines[0]);

@@ -19,9 +19,9 @@ namespace FilPasRougeExemple.Actions
 
 		public override string Description => "Enregistre les dernières Vie De Merde en local";
 
-		public override void Action(string[] parameters)
+		public void Action()
 		{
-			VieDeMerdeQuery query = new VieDeMerdeQuery();
+			VieDeMerdeService query = new VieDeMerdeService();
 			VieDeMerdeCollection collection = query.GetLastVieDeMerdes();
 
 			string applicationData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
@@ -30,6 +30,13 @@ namespace FilPasRougeExemple.Actions
 			this.FileSystem.CreateDirectory(path);
 			string json = Newtonsoft.Json.JsonConvert.SerializeObject(collection);
 			this.FileSystem.WriteAllText(filename, json);
+		}
+
+		protected override void Action(string[] parameters)
+		{
+			if (parameters == null || parameters.Length != 2) { throw new ActionParameterException(ActionParameterException.INVALID_PARAMETER_COUNT); }
+
+			this.Action();
 		}
 	}
 }

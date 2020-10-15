@@ -24,7 +24,7 @@ namespace FilPasRougeExempleTests.Actions
 			}
 
 			// act
-			action.Action(this.GetParameters("GenKey", keyFile));
+			action.Action(keyFile);
 
 			// assert
 			Assert.IsTrue(File.Exists(keyFile));

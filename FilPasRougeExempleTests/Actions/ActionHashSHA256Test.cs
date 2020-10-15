@@ -19,7 +19,7 @@ namespace FilPasRougeExempleTests.Actions
 			ActionHashSHA256 action = new ActionHashSHA256(this.Writer, this.FileSystem);
 			
 			// act
-			action.Action(this.GetParameters("HashSHA256", "viedemerde.html"));
+			action.Action("viedemerde.html");
 
 			// assert
 			Assert.AreEqual("115420f7b6c84e15d86d3c6e692b10a0deb29403d41e4cfc9cbb43d1410a7201", this.Lines[0]);

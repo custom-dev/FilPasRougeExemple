@@ -19,7 +19,7 @@ namespace FilPasRougeExempleTests.Actions
 			ActionHashMD5 action = new ActionHashMD5(this.Writer, this.FileSystem);
 			
 			// act
-			action.Action(this.GetParameters("HashMD5", "viedemerde.html"));
+			action.Action("viedemerde.html");
 
 			// assert
 			Assert.AreEqual("d41969232987b58e0998d16fdbbecb1d", this.Lines[0]);

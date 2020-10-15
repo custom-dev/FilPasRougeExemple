@@ -4,6 +4,9 @@ using System.Text;
 
 namespace FilPasRougeExemple.Actions
 {
+	/// <summary>
+	/// Classe représentant une action exécutable par l'utilisateur.
+	/// </summary>
 	public interface IAction
 	{
 		/// <summary>

@@ -10,7 +10,10 @@ using System.Web;
 
 namespace FilPasRougeExemple.BusinessLayer.VDM
 {
-	public class VieDeMerdeQuery
+	/// <summary>
+	/// Classe faisant la liaison avec le site Vie de merde
+	/// </summary>
+	public class VieDeMerdeService
 	{
 		/// <summary>
 		/// URL du site viedemerde
@@ -28,7 +31,7 @@ namespace FilPasRougeExemple.BusinessLayer.VDM
 		/// 
 		/// Ce constructeur injecte automatiquement les dépendances qui lui sont nécessaires.
 		/// </summary>
-		public VieDeMerdeQuery() : this(new DownloaderFactory())
+		public VieDeMerdeService() : this(new DownloaderFactory())
 		{
 
 		}
@@ -40,11 +43,15 @@ namespace FilPasRougeExemple.BusinessLayer.VDM
 		/// les dépendances à la construction de l'objet. Utile pour les tests unitaires.
 		/// </summary>
 		/// <param name="downloaderFactory"></param>
-		public VieDeMerdeQuery(IDownloaderFactory downloaderFactory)
+		public VieDeMerdeService(IDownloaderFactory downloaderFactory)
 		{
 			_downloaderFactory = downloaderFactory;
 		}
 
+		/// <summary>
+		/// Récupération des dernières VDM.
+		/// </summary>
+		/// <returns>Collection de VDM</returns>
 		public VieDeMerdeCollection GetLastVieDeMerdes()
 		{
 			VieDeMerdeCollection vdms = new VieDeMerdeCollection();
@@ -72,12 +79,22 @@ namespace FilPasRougeExemple.BusinessLayer.VDM
 			return vdms;
 		}
 		
+		/// <summary>
+		/// Extrait le titre d'une VDM
+		/// </summary>
+		/// <param name="article">Noeud HTML représentant la VDM</param>
+		/// <returns>Titre de la VDM</returns>
 		private static string ExtractTitre(HtmlNode article)
 		{
 			HtmlNode titreNode = article.SelectSingleNode(".//h2");
 			return HttpUtility.HtmlDecode(titreNode.InnerText);
 		}
 
+		/// <summary>
+		/// Extrait l'auteur d'une VDM
+		/// </summary>
+		/// <param name="article">Noeud HTML représentant la VDM</param>
+		/// <returns>Auteur de la VDM</returns>
 		private static string ExtractAuteur(HtmlNode article)
 		{
 			HtmlNode auteurNode = article.QuerySelector("div.article-topbar");
@@ -89,6 +106,11 @@ namespace FilPasRougeExemple.BusinessLayer.VDM
 			return HttpUtility.HtmlDecode(auteur);
 		}
 
+		/// <summary>
+		/// Extrait le contenu d'une VDM
+		/// </summary>
+		/// <param name="article">Noeud HTML représentant la VDM</param>
+		/// <returns>Contenu de la VDM</returns>
 		private static string ExtractContent(HtmlNode article)
 		{
 			HtmlNode contentNode = article.SelectSingleNode(".//a[@class='article-link']");

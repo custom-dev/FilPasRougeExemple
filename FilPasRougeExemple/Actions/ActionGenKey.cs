@@ -20,11 +20,19 @@ namespace FilPasRougeExemple.Actions
 
 		public override string Description => "Génère une clé avec AES";
 
-		public override void Action(string[] parameters)
+		public void Action(string keyFile)
 		{
-			string keyFile = parameters[1];
 			byte[] key = AesCryptography.GenerateKey();
 			this.FileSystem.WriteAllBytes(keyFile, key);
+		}
+
+		protected override void Action(string[] parameters)
+		{
+			if (parameters == null || parameters.Length != 2) { throw new ActionParameterException(ActionParameterException.INVALID_PARAMETER_COUNT); }
+
+			string keyFile = parameters[1];
+
+			this.Action(keyFile);
 		}
 	}
 }

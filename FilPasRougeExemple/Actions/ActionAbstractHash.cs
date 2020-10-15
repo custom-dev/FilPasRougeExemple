@@ -17,16 +17,26 @@ namespace FilPasRougeExemple.Actions
 
 		protected abstract HashAlgorithm GetHashAlgorithm();
 
-		public override void Action(string[] parameters)
+		public void Action(string filename)
 		{
+			if (String.IsNullOrEmpty(filename)) { throw new ArgumentNullException(nameof(filename)); }
+
 			using (HashAlgorithm hashAlgo = GetHashAlgorithm())
 			{
-				string filename = parameters[1];
 				byte[] data = File.ReadAllBytes(filename);
 				byte[] hash = hashAlgo.ComputeHash(data);
 				string hex = hash.ToHex();
 				this.Writer.WriteLine(hex);
 			}
+		}
+
+		protected override void Action(string[] parameters)
+		{
+			if (parameters == null || parameters.Length != 2) { throw new ActionParameterException(ActionParameterException.INVALID_PARAMETER_COUNT); }
+
+			string filename = parameters[1];
+
+			this.Action(filename);
 		}
 	}
 }

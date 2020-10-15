@@ -18,10 +18,10 @@ namespace FilPasRougeExempleTests.Actions
 			ActionSub action = new ActionSub(this.Writer);
 			
 			// act
-			action.Action(this.GetParameters("Sub", 3, 5));
-			action.Action(this.GetParameters("Sub", 0, 0));
-			action.Action(this.GetParameters("Sub", 1, 5));
-			action.Action(this.GetParameters("Sub", -3, 5));
+			action.Action(3, 5);
+			action.Action(0, 0);
+			action.Action(1, 5);
+			action.Action(-3, 5);
 
 			// assert
 			Assert.AreEqual("-2", this.Lines[0]);

@@ -17,12 +17,19 @@ namespace FilPasRougeExemple.Actions
 
 		public override string Description => "Affiche les dernières Vie De Merde";
 
-		public override void Action(string[] parameters)
+		public void Action()
 		{
-			VieDeMerdeQuery query = new VieDeMerdeQuery();
+			VieDeMerdeService query = new VieDeMerdeService();
 			VieDeMerdeCollection vdms = query.GetLastVieDeMerdes();
 
-			vdms.Display(this.Writer);			
+			vdms.Display(this.Writer);
+		}
+
+		protected override void Action(string[] parameters)
+		{
+			if (parameters == null || parameters.Length != 2) { throw new ActionParameterException(ActionParameterException.INVALID_PARAMETER_COUNT); }
+
+			this.Action();
 		}
 	}
 }

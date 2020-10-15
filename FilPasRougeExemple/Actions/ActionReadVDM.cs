@@ -19,7 +19,7 @@ namespace FilPasRougeExemple.Actions
 
 		public override string Description => "Lit les dernières Vie De Merde en local";
 
-		public override void Action(string[] parameters)
+		public void Action()
 		{
 			string applicationData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 			string path = Path.Combine(applicationData, "FilPasRouge");
@@ -36,6 +36,13 @@ namespace FilPasRougeExemple.Actions
 			{
 				this.Writer.WriteLine("Pas de données.");
 			}
+		}
+
+		protected override void Action(string[] parameters)
+		{
+			if (parameters == null || parameters.Length != 1) { throw new ActionParameterException(ActionParameterException.INVALID_PARAMETER_COUNT); }
+
+			this.Action();
 		}
 	}
 }

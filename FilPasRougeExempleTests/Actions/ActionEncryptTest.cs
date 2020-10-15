@@ -29,7 +29,7 @@ namespace FilPasRougeExempleTests.Actions
 			}
 
 			// act
-			action.Action(this.GetParameters("Encrypt", keyFile, inputFile));
+			action.Action(keyFile, inputFile);
 
 			// assert
 			Assert.IsTrue(File.Exists(outputFile));

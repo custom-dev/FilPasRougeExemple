@@ -31,7 +31,7 @@ namespace FilPasRougeExempleTests.Actions
 			}
 
 			// act
-			action.Action(this.GetParameters("Decrypt", keyFile, inputFile));
+			action.Action(keyFile, inputFile);
 
 			// assert
 			Assert.IsTrue(File.Exists(outputFile));

@@ -29,7 +29,7 @@ namespace FilPasRougeExempleTests.Services
 				.Returns(() => File.ReadAllText("viedemerde.html"));
 
 			// Act
-			VieDeMerdeQuery query = new VieDeMerdeQuery(downloaderFactory);
+			VieDeMerdeService query = new VieDeMerdeService(downloaderFactory);
 			VieDeMerdeCollection vdms = query.GetLastVieDeMerdes();
 
 			// Assert

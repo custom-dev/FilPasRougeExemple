@@ -42,10 +42,10 @@ namespace FilPasRougeExempleTests.Actions
 			ActionAdd action = new ActionAdd(this.Writer);
 			
 			// act
-			action.Action(this.GetParameters("Add", 3, 5));
-			action.Action(this.GetParameters("Add", 0, 0));
-			action.Action(this.GetParameters("Add", 1, 5));
-			action.Action(this.GetParameters("Add", -3, 5));
+			action.Action(3, 5);
+			action.Action(0, 0);
+			action.Action(1, 5);
+			action.Action(-3, 5);
 
 			// assert
 			Assert.AreEqual("8", this.Lines[0]);

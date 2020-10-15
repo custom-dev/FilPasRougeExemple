@@ -19,7 +19,7 @@ namespace FilPasRougeExempleTests.Actions
 			ActionHello action = new ActionHello(this.Writer);
 
 			// act
-			action.Action(this.GetParameters("Hello"));
+			action.Action();
 
 			// assert
 			Assert.AreEqual("Hello World", this.Lines[0]);

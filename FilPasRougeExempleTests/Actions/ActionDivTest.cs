@@ -18,9 +18,9 @@ namespace FilPasRougeExempleTests.Actions
 			ActionDiv action = new ActionDiv(this.Writer);
 			
 			// act
-			action.Action(this.GetParameters("Div", 15, 5));
-			action.Action(this.GetParameters("Div", 5, 1));
-			action.Action(this.GetParameters("Div", -10, 5));
+			action.Action(15, 5);
+			action.Action(5, 1);
+			action.Action(-10, 5);
 
 			// assert
 			Assert.AreEqual("3", this.Lines[0]);

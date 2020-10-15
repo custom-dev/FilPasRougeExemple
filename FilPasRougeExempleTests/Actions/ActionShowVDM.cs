@@ -18,7 +18,7 @@ namespace FilPasRougeExempleTests.Actions
 			ActionShowVDM action = new ActionShowVDM(this.Writer);
 			
 			// act
-			action.Action(this.GetParameters("Sub"));
+			action.Action();
 
 			// assert
 			Assert.IsTrue(this.Lines[0].StartsWith("Titre: "));
